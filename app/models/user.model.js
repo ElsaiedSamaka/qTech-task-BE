@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
           notNull: true,
         },
       },
-      // virtual attribute that will not be stored in the database but will be returned in the response
       username: {
+        // virtual attribute that will not be stored in the database but will be returned in the response
         type: DataTypes.VIRTUAL,
         get() {
           return `${this.firstname} ${this.lastname}`;
@@ -43,56 +43,27 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: true,
         },
       },
-      isActive: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-      },
-      user_img: {
-        type: DataTypes.TEXT,
-      },
-      cloudinary_id: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: "Please enter your password",
-          },
-          notEmpty: {
-            msg: "Please provide your password",
-          },
-        },
-      },
-      passwordConfirmation: {
-        type: DataTypes.STRING,
+      birthdate:{
+        type: DataTypes.DATEONLY,
         allowNull: false,
       },
+      address:{
+        type: DataTypes.STRING,
+        allowNull: false,
+      }
     },
     {
       freezeTableName: true,
       indexes: [{ fields: ["email"] }],
       validate: {
-        passwordMatch() {
-          if (this.password !== this.passwordConfirmation) {
-            throw new Error("password and passwordConfirmation must match");
-          } else {
-            this.password = bcrypt.hashSync(this.password, 10);
-            this.passwordConfirmation = this.password;
-          }
-        },
+        // validate over common or related records can be placed right here!
       },
       hooks: {
         beforeUpdate: (record, options) => {
-          console.log("record updated xxxxxxxxxxxxxxxxxxx");
+          console.log("runs before record update");
         },
         afterDestroy: async (user, options) => {
-          await db.reviews.destroy({
-            where: { userId: user.id },
-            transaction: options.transaction,
-          });
+         console.log("runs after records deleted");
         },
       },
     }

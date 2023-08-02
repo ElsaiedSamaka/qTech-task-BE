@@ -12,6 +12,8 @@ const swaggerUi = require("swagger-ui-express");
 
 // Import routes and database models
 const authRouter = require("./app/routes/auth.routes");
+const usersRouter = require("./app/routes/users.routes");
+
 const db = require("./app/models");
 
 // Create a new Express app instance
@@ -73,7 +75,7 @@ app.get("/", (req, res) => {
 
 // Set up routes for handling authentication
 app.use("/api/auth", authRouter);
-
+app.use("/api/users", usersRouter);
 // Define the port to listen on
 const PORT = process.env.NODE_APP_PORT || 3000;
 
