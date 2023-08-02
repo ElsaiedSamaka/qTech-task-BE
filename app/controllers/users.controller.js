@@ -88,6 +88,7 @@ const deleteUserById = async (req, res) => {
       });
     }
   };
+  
 module.exports = {
     getUsers,
     createUser,
