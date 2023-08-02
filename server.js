@@ -5,13 +5,13 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require('cookie-parser')
+const session = require('express-session')
 const rateLimit = require("express-rate-limit");
 const passport = require("passport");
 const socketio = require("socket.io");
 const swaggerUi = require("swagger-ui-express");
 
 // Import routes and database models
-const authRouter = require("./app/routes/auth.routes");
 const usersRouter = require("./app/routes/users.routes");
 
 const db = require("./app/models");
@@ -42,7 +42,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors());
 // cookie parser
 app.use(cookieParser())
-
+// express session
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+}))
 // Set up error-handling middleware
 app.use((err, req, res, next) => {
   console.error(err);
@@ -74,8 +79,8 @@ app.get("/", (req, res) => {
 });
 
 // Set up routes for handling authentication
-app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
+
 // Define the port to listen on
 const PORT = process.env.NODE_APP_PORT || 3000;
 
