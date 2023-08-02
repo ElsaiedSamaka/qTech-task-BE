@@ -40,7 +40,9 @@ const swaggerDocument = require("./app/helper/swaggerDocument");
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Enable cross-origin requests
-app.use(cors());
+app.use(cors({
+  origin:'http://localhost:4200',
+}));
 // cookie parser
 app.use(cookieParser())
 // express session
