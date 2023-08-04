@@ -57,7 +57,6 @@ const updateUserById = async (req, res) => {
         firstname: req.body.firstname || user.firstname,
         lastname: req.body.lastname || user.lastname,
         phonenumber: req.body.phonenumber || user.phonenumber,
-        countrycode: req.body.countrycode || user.countrycode,
         email: req.body.email || user.email,
         birthdate: req.body.birthdate||user.birthdate,
         address: req.body.address || user.address,
