@@ -42,6 +42,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Enable cross-origin requests
 app.use(cors({
   origin:'http://localhost:4200',
+  credentials:true
 }));
 // cookie parser
 app.use(cookieParser())
