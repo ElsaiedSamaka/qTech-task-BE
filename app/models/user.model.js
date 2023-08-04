@@ -32,11 +32,6 @@ module.exports = (sequelize, DataTypes) => {
           isInt: true,
         },
       },
-      countrycode: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        default: 20,
-      },
       email: {
         type: DataTypes.STRING,
         validate: {

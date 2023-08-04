@@ -18,13 +18,11 @@ const getUsers = async (req, res) => {
   };
 // post a new user 
 const createUser = async (req,res)=>{
-  console.log("req.body",req.body);
     try {
      const user = await User.create({
          firstname: req.body.firstname,
          lastname: req.body.lastname,
          phonenumber: req.body.phonenumber,
-         countrycode: req.body.countrycode,
          email: req.body.email,
          birthdate: req.body.birthdate,
          address: req.body.address,
