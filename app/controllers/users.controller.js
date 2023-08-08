@@ -1,5 +1,4 @@
 const { getPagination, getPagingData } = require("../helper/getPagination");
-
 const User = require("../models").user;
 
 // Get List of Users
